@@ -28,14 +28,14 @@ jobs:
           push: true
           tags: ${{ secrets.DOCKER_USERNAME }}/${{ secrets.DOCKERHUB_REPOSITORY }}:${{ github.sha }}
 
-      # - name: Deploy to EC2 instance
-      #   uses: appleboy/ssh-action@master
-      #   with:
-      #     host: ${{ secrets.EC2_HOST }}
-      #     username: ${{ secrets.EC2_USERNAME }}
-      #     key: ${{ secrets.EC2_PRIVATE_KEY }}
-      #     script: |
-      #       docker stop docker1 || true
-      #       docker rm docker1 || true
-      #       docker pull ${{ secrets.DOCKER_USERNAME }}/docker1:${{ github.sha }}
-      #       docker run -d --name docker1 -p 80:80 ${{ secrets.DOCKER_USERNAME }}/docker1:${{ github.sha }}
+      - name: Deploy to EC2 instance
+        uses: appleboy/ssh-action@master
+        with:
+          host: ${{ secrets.EC2_HOST }}
+          username: ${{ secrets.EC2_USERNAME }}
+          key: ${{ secrets.EC2_PRIVATE_KEY }}
+          script: |
+            docker stop docker1 || true
+            docker rm docker1 || true
+            docker pull ${{ secrets.DOCKER_USERNAME }}/docker1:${{ github.sha }}
+            docker run -d --name docker1 -p 80:80 ${{ secrets.DOCKER_USERNAME }}/docker1:${{ github.sha }}
