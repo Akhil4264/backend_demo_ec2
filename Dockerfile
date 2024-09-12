@@ -7,6 +7,6 @@ COPY package.json .
 RUN npm install
 
 COPY . .
-ENV MONGOURL=mongodb+srv://b20091:tynytNDypi6h8V7Q@cluster0.ue5fh.mongodb.net/
+ENV MONGO_URL mongodb+srv://b20091:tynytNDypi6h8V7Q@cluster0.ue5fh.mongodb.net/
 
 CMD [ "node","app.js" ]
